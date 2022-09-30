@@ -1,0 +1,4 @@
+[flake8]
+max_line_length=88
+docstring-convention=google
+select=D103,B950,F401
