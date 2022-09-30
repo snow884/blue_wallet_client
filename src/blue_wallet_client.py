@@ -1,3 +1,6 @@
+"""
+Blue wallet client
+"""
 import base64
 
 import requests
@@ -8,11 +11,15 @@ ROOT_URL = "https://lndhub.herokuapp.com"
 
 
 class CredentialsMissingException(Exception):
-    pass
+    """
+    Exception class for missing credentials error
+    """
 
 
 class RateLimitExceededException(Exception):
-    pass
+    """
+    Exception class for rate limit exceeded error
+    """
 
 
 class BlueWalletClient:
@@ -59,7 +66,10 @@ class BlueWalletClient:
 
             if not self.creds:
                 raise CredentialsMissingException(
-                    f"The method {fcn} requires that class is initialized with login and password."
+                    f"""
+                    The method {fcn} requires that class is 
+                    initialized with login and password.
+                    """
                 )
 
             return fcn(self, *args, **kwargs)
@@ -99,7 +109,10 @@ class BlueWalletClient:
 
         if int(headers.get("X-Ratelimit-Remaining", 100)) < 10:
             raise RateLimitExceededException(
-                f"Rate limit dropped below {int(headers['X-Ratelimit-Remaining'])}, headers: {headers}"
+                f"""
+                Rate limit dropped below {int(headers['X-Ratelimit-Remaining'])}, 
+                headers: {headers}
+                """
             )
 
     @_check_login
@@ -170,7 +183,10 @@ class BlueWalletClient:
 
         if res_dict.get("error", None):
             raise Exception(
-                f"Error paying the invoice '{payment_request}': {res_dict.get('message','')}, code: {res_dict.get('code','')}"
+                f"""
+                Error paying the invoice '{payment_request}': 
+                {res_dict.get('message','')}, code: {res_dict.get('code','')}
+                """
             )
 
     @_check_login
