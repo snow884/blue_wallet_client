@@ -5,7 +5,7 @@ name: CICD prod
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
 
