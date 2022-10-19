@@ -17,10 +17,12 @@ jobs:
       - run: echo "Checking that the code for correctness..."
       - run: pip install pylint==2.14.5
       - run: pip install -r requirements.txt
-      - run: pylint --errors-only src/
+      - run: pip install --upgrade pip
       - run: echo "Checking that the code is formatted correctly..."
       - run: pip install pre-commit==2.20.0
       - run: pre-commit run --all-files 
+      - run: cd src/
+      - run: pylint --errors-only src/
 
   build:
     runs-on: ubuntu-latest
