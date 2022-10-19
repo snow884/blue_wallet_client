@@ -21,8 +21,6 @@ jobs:
       - run: echo "Checking that the code is formatted correctly..."
       - run: pip install pre-commit==2.20.0
       - run: pre-commit run --all-files 
-      - run: cd src/
-      - run: pylint --errors-only src/
 
   build:
     runs-on: ubuntu-latest
