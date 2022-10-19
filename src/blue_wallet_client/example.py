@@ -22,8 +22,8 @@ def send_receive_payment():
     """
     # replace xxx and yyy with credentials obtained from the sign_up method
     bw_clinet = BlueWalletClient(
-        bluewallet_login="xxx",
-        bluewallet_password="yyy",
+        bluewallet_login="b756c92a75cf9c0f77e9",
+        bluewallet_password="7f165b1e634ef992c328",
     )
 
     node_info = bw_clinet.get_node_info()
@@ -60,7 +60,7 @@ def send_receive_payment():
 
         time.sleep(60)
 
-    print("The wallet will now pay an invoice.")
+    print("This will now pay an invoice.")
 
     payment_request = input("Please specify the invoice you want to pay: ")
 
@@ -70,3 +70,11 @@ def send_receive_payment():
 
     print("Here is your current balance:")
     print(balance_btc)
+
+    print("This will send an amount to a lightning address.")
+
+    bw_clinet.sendtoaddress(
+        lightning_address="adamivansky53@zbd.gg",
+        amount=50,
+        message="test send of 50 satoshis",
+    )
