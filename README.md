@@ -1,5 +1,5 @@
 # Blue Wallet API Client
-Bitcoin lightning wallet for python. A Python client for the API of non-custodial Bitcoin Lightning wallet called Blue Wallet.
+Bitcoin lightning wallet for python. A Python client for the API of custodial Bitcoin Lightning wallet called Blue Wallet.
 
 ## Intro
 
