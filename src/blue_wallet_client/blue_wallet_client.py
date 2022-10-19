@@ -42,7 +42,7 @@ class BlueWalletClient:
                 the username generated from get_login. Defaults to None.
             bluewallet_password (str, optional): The password to your Blue wallet or
                 the username generated from get_login. Defaults to None.
-            self.root_url (str): URL to LNDHub backend. Defaults to Blue wallet backend.
+            root_url (str): URL to LNDHub backend. Defaults to Blue wallet backend.
         """
 
         self.self.root_url = root_url
@@ -98,17 +98,22 @@ class BlueWalletClient:
             inv_data["r_hash"]: inv_data for inv_data in invoice_list
         }
 
-    def get_login(self):
+    def get_login(
+        self,
+        root_url: str = "https://lndhub.herokuapp.com",
+    ):
         """
         Register a new Blue wallet account and return a dictionary
         containing credential
 
         Args:
             limit (limit, optional): Number of historical invoices to load
+            root_url (str): URL to LNDHub backend. Defaults to Blue wallet backend.
         """
+
         body = {"partnerid": "bluewallet", "accounttype": "common"}
 
-        res = self.http.post(f"{self.root_url}/create", data=body)
+        res = self.http.post(f"{root_url}/create", data=body)
         res.raise_for_status()
 
         return res.json()
