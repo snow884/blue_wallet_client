@@ -21,3 +21,12 @@ jobs:
       - run: echo "Checking that the code is formatted correctly..."
       - run: pip install pre-commit==2.20.0
       - run: pre-commit run --all-files 
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - run: pip install -r streamlit-app/requirements.txt
+      - run: python3 -m build
+      - run: python3 -m twine upload dist/*

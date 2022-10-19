@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "blue_wallet_client"
-version = "0.0.5"
+version = "0.0.4"
 authors = [
   { name="Adam Ivansky", email="adam.ivansky@gmail.com" },
 ]

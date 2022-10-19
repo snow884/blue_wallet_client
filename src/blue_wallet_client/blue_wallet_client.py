@@ -7,6 +7,8 @@ import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
+from .lightning_address_utils import get_invoice_from_address
+
 ROOT_URL = "https://lndhub.herokuapp.com"
 
 
@@ -188,6 +190,24 @@ class BlueWalletClient:
                 {res_dict.get('message','')}, code: {res_dict.get('code','')}
                 """
             )
+
+    @_check_login
+    def sendtoaddress(self, lightning_address: str, amount: int, message: str):
+        """
+        Send payment to a lightning address based on how it is defined on
+        https://github.com/andrerfneves/lightning-address/blob/master/README.md
+
+        Args:
+            lightning_address (str): lightning address in the format username@domain.suffix
+            amount (int): Amount of satoshis to send
+            message (str): Message to attach
+        """
+
+        payment_request = get_invoice_from_address(
+            lightning_address, amount, comment=message, nonce=None
+        )
+
+        self.payinvoice(payment_request, amount)
 
     @_check_login
     def getuserinvoices(self, limit: int) -> dict:

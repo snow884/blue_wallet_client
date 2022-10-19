@@ -85,6 +85,14 @@ bw_clinet.payinvoice(payment_request)
 ```
 The invoice should be paid almost instantly. 
 
+The class also supports sending of payments to a lightning address as defined by André Neves https://github.com/andrerfneves/lightning-address/blob/master/README.md .
+
+In order to send Bitcoin to the lightning address use the `sendtoaddress` method 
+
+```
+bw_clinet.sendtoaddress(lightning_address='adamivansky53@zbd.gg', amount=50, message='test send of 50 satoshis' )
+```
+
 ## Other notes
 
 The Blue wallet API struggles once the number of invoices reaches about 1000. 

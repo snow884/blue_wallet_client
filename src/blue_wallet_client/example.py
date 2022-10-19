@@ -21,7 +21,10 @@ def send_receive_payment():
     This method demonstrates the functionality of this client
     """
     # replace xxx and yyy with credentials obtained from the sign_up method
-    bw_clinet = BlueWalletClient(bluewallet_login="xxx", bluewallet_password="yyy")
+    bw_clinet = BlueWalletClient(
+        bluewallet_login="b756c92a75cf9c0f77e9",
+        bluewallet_password="7f165b1e634ef992c328",
+    )
 
     node_info = bw_clinet.get_node_info()
 
