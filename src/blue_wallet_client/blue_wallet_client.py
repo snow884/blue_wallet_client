@@ -9,8 +9,6 @@ from requests.packages.urllib3.util.retry import Retry
 
 from .lightning_address_utils import get_invoice_from_address
 
-ROOT_URL = "https://lndhub.herokuapp.com"
-
 
 class CredentialsMissingException(Exception):
     """
@@ -30,7 +28,12 @@ class BlueWalletClient:
     Bitcoin Lightning wallet
     """
 
-    def __init__(self, bluewallet_login: str = None, bluewallet_password: str = None):
+    def __init__(
+        self,
+        bluewallet_login: str = None,
+        bluewallet_password: str = None,
+        root_url: str = "https://lndhub.herokuapp.com",
+    ):
         """
         Initiate the Blue wallet client.
 
@@ -39,7 +42,11 @@ class BlueWalletClient:
                 the username generated from get_login. Defaults to None.
             bluewallet_password (str, optional): The password to your Blue wallet or
                 the username generated from get_login. Defaults to None.
+            self.root_url (str): URL to LNDHub backend. Defaults to Blue wallet backend.
         """
+
+        self.self.root_url = root_url
+
         retry_strategy = Retry(
             total=3,
             status_forcelist=[500, 502, 503, 504],
@@ -101,7 +108,7 @@ class BlueWalletClient:
         """
         body = {"partnerid": "bluewallet", "accounttype": "common"}
 
-        res = self.http.post(f"{ROOT_URL}/create", data=body)
+        res = self.http.post(f"{self.root_url}/create", data=body)
         res.raise_for_status()
 
         return res.json()
@@ -124,7 +131,7 @@ class BlueWalletClient:
 
         Args:
         """
-        res = self.http.post(f"{ROOT_URL}/auth", data=self.creds)
+        res = self.http.post(f"{self.root_url}/auth", data=self.creds)
         self._check_limit_reached(res.headers)
         res.raise_for_status()
         res_dict = res.json()
@@ -147,7 +154,7 @@ class BlueWalletClient:
         """
         body = {"amt": amt, "memo": memo}
         res = self.http.post(
-            f"{ROOT_URL}/addinvoice",
+            f"{self.root_url}/addinvoice",
             data=body,
             headers={"Authorization": f"{self.access_token}"},
         )
@@ -174,7 +181,7 @@ class BlueWalletClient:
             body["amount"] = amount
 
         res = self.http.post(
-            f"{ROOT_URL}/payinvoice",
+            f"{self.root_url}/payinvoice",
             data=body,
             headers={"Authorization": f"{self.access_token}"},
         )
@@ -224,7 +231,7 @@ class BlueWalletClient:
         params = {"limit": limit}
 
         res = self.http.get(
-            f"{ROOT_URL}/getuserinvoices",
+            f"{self.root_url}/getuserinvoices",
             params=params,
             headers={"Authorization": f"{self.access_token}"},
         )
@@ -297,7 +304,7 @@ class BlueWalletClient:
             int: Value amount in the wallet
         """
         res = self.http.get(
-            f"{ROOT_URL}/balance",
+            f"{self.root_url}/balance",
             headers={"Authorization": f"{self.access_token}"},
         )
 
@@ -315,7 +322,7 @@ class BlueWalletClient:
             str: On-chain address
         """
         res = self.http.get(
-            f"{ROOT_URL}/getbtc",
+            f"{self.root_url}/getbtc",
             headers={"Authorization": f"{self.access_token}"},
         )
 
@@ -333,7 +340,7 @@ class BlueWalletClient:
             dict: Information on the lightning node
         """
         res = self.http.get(
-            f"{ROOT_URL}/getinfo",
+            f"{self.root_url}/getinfo",
             headers={"Authorization": f"{self.access_token}"},
         )
 
