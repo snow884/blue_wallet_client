@@ -20,6 +20,7 @@ repos:
     hooks:
     - id: black
       args: [--config=pyproject.toml]
+      exclude: src/blue_wallet_client/__init__.py
 
 # flake8
 -   repo: https://github.com/pycqa/flake8
