@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "blue_wallet_client"
-version = "0.0.5"
+version = "0.0.7"
 authors = [
   { name="Adam Ivansky", email="adam.ivansky@gmail.com" },
 ]
@@ -15,6 +15,9 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+]
+dependencies = [
+  'requests >= 2.6.1',
 ]
 
 [project.urls]
