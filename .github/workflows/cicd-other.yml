@@ -19,8 +19,8 @@ jobs:
       - uses: actions/setup-python@v3
       - run: echo "Checking that the code for correctness..."
       - run: pip install pylint==2.14.5
-      - run: pip install -r streamlit-app/requirements.txt
-      - run: pylint --errors-only streamlit-app/
+      - run: pip install -r requirements.txt
+      - run: pylint --errors-only src/
       - run: echo "Checking that the code is formatted correctly..."
       - run: pip install pre-commit==2.20.0
       - run: pre-commit run --all-files 
