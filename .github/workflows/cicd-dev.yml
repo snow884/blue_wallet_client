@@ -31,4 +31,4 @@ jobs:
       - run: pip install twine
       - run: python3 -m pip install --upgrade build
       - run: python3 -m build
-      - run: python3 -m twine upload --repository testpypi dist/* -u __token__ -p ${{ secrets.DEV_PYPI_TOKEN }}
+      - run: python3 -m twine upload --repository testpypi dist/* -u __token__ -p ${{ secrets.PYPI_TOKEN_DEV }}
