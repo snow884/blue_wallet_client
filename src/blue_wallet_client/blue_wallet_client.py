@@ -45,7 +45,7 @@ class BlueWalletClient:
             root_url (str): URL to LNDHub backend. Defaults to Blue wallet backend.
         """
 
-        self.self.root_url = root_url
+        self.root_url = root_url
 
         retry_strategy = Retry(
             total=3,
